@@ -29,19 +29,32 @@ class GHFlutterState extends State<GHFlutter> {
       appBar: new AppBar(
         title: new Text(Strings.appTitle),
       ),
-      body: new Text(Strings.appTitle),
+      body: new ListView.builder(
+        padding: const EdgeInsets.all(16.0),
+        itemCount: _members.length,
+        itemBuilder: (BuildContext context, int position){
+          return _buildRow(position);
+        },
+      ),
     );
   }
 
   @override
   void initState() {
     super.initState();
-    
+
     _loadData();
   }
 
+  Widget _buildRow(int i) {
+    return new ListTile(
+      title: new Text("${_members[i]["login"]}", style: _biggerFont),
+    );
+  }
+
+
   _loadData() async {
-    String dataURL = "https://github.com/orgs/codeandcoffeelb/people";
+    String dataURL = "https://api.github.com/orgs/codeandcoffeelb/members";
     // http.Response response = await http.get(dataURL);
     http.get(dataURL)
     .then( (response) => 
