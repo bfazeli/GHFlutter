@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'memberWidget.dart';
 
 import 'member.dart';
 import 'strings.dart';
@@ -16,6 +17,14 @@ class GHFlutterState extends State<GHFlutter> {
 
     _loadData();
   }
+
+  _pushMember(Member member) {
+      Navigator.of(context).push(
+        new MaterialPageRoute(
+          builder: (context) => new MemberWidget(member)
+        )
+      );
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +57,7 @@ class GHFlutterState extends State<GHFlutter> {
           backgroundColor: Colors.green,
           backgroundImage: new NetworkImage(_members[i].avatarUrl),
         ),
+        onTap: () { _pushMember(_members[i]); },
       )
     );
   }
