@@ -17,6 +17,10 @@ class GHFlutterApp extends StatelessWidget {
   }
 }
 
+// Use base n system to denote at most 2 digits for the integars
+// in matrix and then use radix sort on the new based n system 
+// k then becomes n - 1 while n is still n so O(n * k) == O(n*n-1)
+// linear time.
 
 
 
